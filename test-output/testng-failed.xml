@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="Tests.Registry_Module3_MCII_Test">
+        <methods>
+          <include name="setup"/>
+          <include name="sentReportToTheMail"/>
+          <include name="closeBrowser"/>
+          <include name="Verification_of_Start_and_End_Reporting_Period_on_Offset_Issuance_Page"/>
+          <include name="addResultToTestrail"/>
+          <include name="start"/>
+        </methods>
+      </class> <!-- Tests.Registry_Module3_MCII_Test -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
