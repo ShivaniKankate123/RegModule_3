@@ -3,6 +3,8 @@ package Tests;
 import org.testng.annotations.Test;
 import org.testng.annotations.Test;
 import org.testng.annotations.Test;
+import org.testng.annotations.Test;
+import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
@@ -120,7 +122,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		}
 		src.navigateToBatchExemption();
 		src.Add_Limited_Exemption_Functionality_For_Revisions_Requsted();
-		
+
 	}
 
 	// For Denied
@@ -506,7 +508,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Log_Out_User();
 		Thread.sleep(3000);
 		sc.loginFunctionality("California", "Authority");
-		sc.secQueAns();		
+		sc.secQueAns();
 		src.navigateToBatchExemption();
 		src.Passphrase_Verification();
 	}
@@ -530,7 +532,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Log_Out_User();
 		Thread.sleep(3000);
 		sc.loginFunctionality("California", "Authority");
-		sc.secQueAns();		
+		sc.secQueAns();
 		src.navigateToBatchExemption();
 		src.Passphrase_Verification_Deny();
 	}
@@ -627,7 +629,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Log_Out_User();
 		Thread.sleep(3000);
 		sc.loginFunctionality("California", "Authority");
-		sc.secQueAns();		
+		sc.secQueAns();
 		src.navigateToBatchExemption();
 		src.Revisions_Requsted();
 		src.Log_Out_User();
@@ -755,7 +757,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Log_Out_User();
 		Thread.sleep(3000);
 		sc.loginFunctionality("California", "Authority");
-		sc.secQueAns();		
+		sc.secQueAns();
 		src.navigateToBatchExemption();
 		src.Cancel_Button_On_Approve_Request_Card();
 	}
@@ -779,7 +781,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Log_Out_User();
 		Thread.sleep(3000);
 		sc.loginFunctionality("California", "Authority");
-		sc.secQueAns();		
+		sc.secQueAns();
 		src.navigateToBatchExemption();
 		src.Passphrase_Verification_For_Approve();
 	}
@@ -801,7 +803,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Add_LE_For_Different_Batch_And_Budget_Year();
 	}
 
-	@Test(priority = 35, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 35, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Validation_of_Upload_File_functionality_with_file_having_no_records_on_Create_Limited_Exemption_page()
 			throws Exception {
 		// testCaseId="39896";
@@ -816,7 +818,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Upload_Empty_File();
 	}
 
-	@Test(priority = 36, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 36, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Validation_of_Cancel_button_functionality_for_Upload_Files_on_Create_Limited_Exemption_page()
 			throws Exception {
 		// testCaseId="39901";
@@ -831,7 +833,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Cancel_Button_On_Upload_Files();
 	}
 
-	@Test(priority = 37, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 37, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Validation_of_Effective_date_field_for_Upload_File_functionality_on_Create_Limited_Exemption_page()
 			throws Exception {
 		// testCaseId="39898";
@@ -846,7 +848,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Effective_Date_Validation_For_Upload_File();
 	}
 
-	@Test(priority = 38, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 38, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Validation_of_Comments_field_for_Upload_File_functionality_on_Create_Limited_Exemption_page()
 			throws Exception {
 		// testCaseId="39899";
@@ -900,7 +902,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Log_Out_User();
 		Thread.sleep(3000);
 		sc.loginFunctionality("California", "Authority");
-		sc.secQueAns();		
+		sc.secQueAns();
 		src.navigateToBatchExemption();
 		src.Revisions_Requsted();
 		src.Log_Out_User();
@@ -939,7 +941,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Verfication_Of_Approve_Limited_Exemption_Functionality();
 	}
 
-	@Test(priority = 42, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 42, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Validation_of_Upload_File_Functionality_with_file_having_no_records_on_Create_Limited_Exemption_page()
 			throws Exception {
 		// testCaseId="40400";
@@ -954,7 +956,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Upload_Empty_File();
 	}
 
-	@Test(priority = 43, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 43, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Validation_of_number_of_rows_missing_for_Upload_File_functionality_on_Create_Limited_Exemption_page()
 			throws Exception {
 		// testCaseId="40397";
@@ -969,7 +971,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Empty_Rows_Upload_File();
 	}
 
-	@Test(priority = 44, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 44, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Validation_of_Entity_ID_for_Uploading_duplicate_data() throws Exception {
 		// testCaseId="40398";
 		sc = new publicHomePage(driver, prop);
@@ -983,7 +985,7 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Duplicate_Entity_ID();
 	}
 
-	@Test(priority = 45, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 45, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Validation_of_file_language_for_Upload_File_functionality_on_Create_Limited_Exemption_page()
 			throws Exception {
 		// testCaseId="40399";
@@ -999,7 +1001,7 @@ public class Registry_Module3_MLE_Tests extends base {
 	}
 
 	// For Saved Status
-	@Test(priority = 46, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 46, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
 	public void Verification_of_Add_Limited_Exemption_by_Upload_File_functionality_for_Saved_or_Revision_Requested_batch_exemption()
 			throws Exception {
 		// testCaseId="39614";
@@ -1016,7 +1018,7 @@ public class Registry_Module3_MLE_Tests extends base {
 	}
 
 	// For Revisions Requsted
-	@Test(priority = 46, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
+	@Test(priority = 47, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = false)
 	public void Verification_of_Add_Limited_Exemption_by_Upload_File_functionality_for_Revision_Requested_batch_exemption()
 			throws Exception {
 		// testCaseId="39614";
@@ -1049,8 +1051,9 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.navigateToBatchExemption();
 		src.Add_Limited_Exemption_By_UploadFile_For_RevisionsRequsted();
 	}
-	@Test(priority = 47, retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Validation_of_Add_Limited_Exemption_for_same_entity_in_a_batch() throws Exception{
+
+	@Test(priority = 48, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Validation_of_Add_Limited_Exemption_for_same_entity_in_a_batch() throws Exception {
 		// testCaseId="39649";
 		sc = new publicHomePage(driver, prop);
 		src = new Registry_Module3_MLE(driver);
@@ -1061,10 +1064,11 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.navigateToBatchExemption();
 		src.navigateToCreateLimitedExemptionBatch();
 		src.createBatch();
-		src.Validation_Of_Same_Entity_ID_For_Batch();	
+		src.Validation_Of_Same_Entity_ID_For_Batch();
 	}
-	@Test(priority = 48, retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Verification_of_UI_of_Upload_Files_pop_up_of_Create_Limited_Exemptions_page() throws Exception{
+
+	@Test(priority = 49, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_UI_of_Upload_Files_pop_up_of_Create_Limited_Exemptions_page() throws Exception {
 		// testCaseId="40401";
 		sc = new publicHomePage(driver, prop);
 		src = new Registry_Module3_MLE(driver);
@@ -1076,8 +1080,10 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.createBatch();
 		src.UI_Of_Upload_Files_Pop_Up();
 	}
-	@Test(priority = 49, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
-	public void UI_Verification_of_Batch_Details_page_for_Jurisidction_Authority_when_Limited_Exemption_batch_is_in_other_than_Proposed_status() throws Exception{
+	//Saved Status
+	@Test(priority = 50, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void UI_Verification_of_Batch_Details_page_for_Jurisidction_Authority_when_Limited_Exemption_batch_is_in_other_than_Proposed_status()
+			throws Exception {
 		// testCaseId="39909";
 		sc = new publicHomePage(driver, prop);
 		src = new Registry_Module3_MLE(driver);
@@ -1089,14 +1095,65 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.createBatch();
 		src.Saved_Batch_ID();
 		src.Log_Out_User();
+		Thread.sleep(3000);
 		sc.loginFunctionality("California", "Authority");
 		sc.secQueAns();
-		Thread.sleep(3000);
 		src.navigateToBatchExemption();
-		src.Batch_Details_Page_UI_For_JU_Au_Other_Than_Proposed_Status();	
+		src.Batch_Details_Page_UI_For_JU_Au_Other_Than_Proposed_Status();
 	}
-	@Test(priority = 50, retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Validation_of_Budget_Year_field_on_the_Create_Limited_Exemption_Batch_page() throws Exception{
+	//Approved Status
+	@Test(priority = 51, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void UI_Verification_of_Batch_Details_page_for_Jurisidction_Authority_when_Limited_Exemption_batch_is_in_other_than_Proposed_status_Approved()
+			throws Exception {
+		// testCaseId="39909";
+		sc = new publicHomePage(driver, prop);
+		src = new Registry_Module3_MLE(driver);
+		sc.selectJurisdiction("California");
+		sc.loginFunctionality("California", "JurisdictionAdmin");
+		sc.secQueAns();
+		src.SelectEntityId();
+		src.navigateToBatchExemption();
+		src.navigateToCreateLimitedExemptionBatch();
+		src.createBatch();
+		src.Add_Limited_Exemption_Generic_Method();
+		src.Propose_Limited_Exemptions();
+		src.Fetch_Batch_Id_Propose();
+		src.Log_Out_User();
+		Thread.sleep(3000);
+		sc.loginFunctionality("California", "Authority");
+		sc.secQueAns();
+		src.navigateToBatchExemption();
+		src.Approve_Generic_Method();
+		src.Batch_Details_Page_UI_For_JU_Au_Approved_Status();
+	}
+	//Revisions Requsted
+	@Test(priority = 52, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void UI_Verification_of_Batch_Details_page_for_Jurisidction_Authority_when_Limited_Exemption_batch_is_in_other_than_Proposed_status_Revisions_Requsted()
+			throws Exception {
+		// testCaseId="39909";
+		sc = new publicHomePage(driver, prop);
+		src = new Registry_Module3_MLE(driver);
+		sc.selectJurisdiction("California");
+		sc.loginFunctionality("California", "JurisdictionAdmin");
+		sc.secQueAns();
+		src.SelectEntityId();
+		src.navigateToBatchExemption();
+		src.navigateToCreateLimitedExemptionBatch();
+		src.createBatch();
+		src.Add_Limited_Exemption_Generic_Method();
+		src.Propose_Limited_Exemptions();
+		src.Fetch_Batch_Id_Propose();
+		src.Log_Out_User();
+		Thread.sleep(3000);
+		sc.loginFunctionality("California", "Authority");
+		sc.secQueAns();
+		src.navigateToBatchExemption();
+		src.Revisions_Requsted();
+		src.Batch_Details_Page_UI_For_JU_Au_Revisions_Requsted_Status();
+	}
+	
+	@Test(priority = 53, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Validation_of_Budget_Year_field_on_the_Create_Limited_Exemption_Batch_page() throws Exception {
 		// testCaseId="39604";
 		sc = new publicHomePage(driver, prop);
 		src = new Registry_Module3_MLE(driver);
@@ -1107,10 +1164,12 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.navigateToBatchExemption();
 		src.navigateToCreateLimitedExemptionBatch();
 		src.validation_BudgetYear();
-		
+
 	}
-	@Test(priority = 51, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled=false)
-	public void Validation_of_Limited_Exemption_quantity_for_Upload_File_functionality_on_Create_Limited_Exemption_page() throws Exception{
+
+	@Test(priority = 54, retryAnalyzer = Analyzer.RetryAnalyzer.class, enabled = true)
+	public void Validation_of_Limited_Exemption_quantity_for_Upload_File_functionality_on_Create_Limited_Exemption_page()
+			throws Exception {
 		// testCaseId="39894";
 		sc = new publicHomePage(driver, prop);
 		src = new Registry_Module3_MLE(driver);
@@ -1123,8 +1182,10 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.Validation_Of_Limited_Exemption_Quantity();
 		src.Delete_Batch_Exemption_Functionality();
 	}
-	@Test(priority = 52, retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Verification_of_display_approved_Limited_Exemptions_in_Holding_Limits_table_on_Entity_Profile_page() throws Exception{
+
+	@Test(priority = 55, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_display_approved_Limited_Exemptions_in_Holding_Limits_table_on_Entity_Profile_page()
+			throws Exception {
 		// testCaseId="39920";
 		sc = new publicHomePage(driver, prop);
 		src = new Registry_Module3_MLE(driver);
@@ -1155,8 +1216,9 @@ public class Registry_Module3_MLE_Tests extends base {
 		src.navigateToLimitedExemption();
 		src.Limited_Exemptions_In_Holding_Limit();
 	}
-	@Test(priority = 53, retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void UI_verification_of_Manage_Limited_Exemption_section_on_home_page() throws Exception{
+
+	@Test(priority = 56, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void UI_verification_of_Manage_Limited_Exemption_section_on_home_page() throws Exception {
 		// testCaseId="39651";
 		sc = new publicHomePage(driver, prop);
 		src = new Registry_Module3_MLE(driver);
@@ -1164,6 +1226,111 @@ public class Registry_Module3_MLE_Tests extends base {
 		sc.loginFunctionality("California", "JurisdictionAdmin");
 		sc.secQueAns();
 		src.UI_Of_Manage_Limited_Exemption();
+	}
+
+	@Test(priority = 57, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Status_Update_after_Limited_Exemption_Batch_is_approved_by_Jurisdiction_Authority()
+			throws Exception {
+		// testCaseId="39919";
+		sc = new publicHomePage(driver, prop);
+		src = new Registry_Module3_MLE(driver);
+		sc.selectJurisdiction("California");
+		sc.loginFunctionality("California", "JurisdictionAdmin");
+		sc.secQueAns();
+		src.SelectEntityId();
+		src.navigateToBatchExemption();
+		src.navigateToCreateLimitedExemptionBatch();
+		src.createBatch();
+		src.Add_Limited_Exemption_Generic_Method();
+		src.Propose_Limited_Exemptions();
+		src.Fetch_Batch_Id_Propose();
+		src.Log_Out_User();
+		Thread.sleep(3000);
+		sc.loginFunctionality("California", "Authority");
+		sc.secQueAns();
+		Thread.sleep(3000);
+		src.navigateToBatchExemption();
+		src.Status_Update_After_Approved_Limited_Exemption();
+		src.MyApprovals();
+	}
+
+	@Test(priority = 58, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Status_Update_after_Limited_Exemption_Batch_is_Denied_by_Jurisdiction_Authority()
+			throws Exception {
+		// testCaseId="39922";
+		sc = new publicHomePage(driver, prop);
+		src = new Registry_Module3_MLE(driver);
+		sc.selectJurisdiction("California");
+		sc.loginFunctionality("California", "JurisdictionAdmin");
+		sc.secQueAns();
+		src.SelectEntityId();
+		src.navigateToBatchExemption();
+		src.navigateToCreateLimitedExemptionBatch();
+		src.createBatch();
+		src.Add_Limited_Exemption_Generic_Method();
+		src.Propose_Limited_Exemptions();
+		src.Fetch_Batch_Id_Propose();
+		src.Log_Out_User();
+		Thread.sleep(3000);
+		sc.loginFunctionality("California", "Authority");
+		sc.secQueAns();
+		Thread.sleep(3000);
+		src.navigateToBatchExemption();
+		src.Status_Update_After_Deny_Limited_Exemption();
+		src.MyApprovals();
+	}
+
+	@Test(priority = 59, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void UI_Verification_of_Batch_Exemptions_page() throws Exception {
+		// testCaseId="39643";
+		sc = new publicHomePage(driver, prop);
+		src = new Registry_Module3_MLE(driver);
+		sc.selectJurisdiction("California");
+		sc.loginFunctionality("California", "JurisdictionAdmin");
+		sc.secQueAns();
+		src.SelectEntityId();
+		src.navigateToBatchExemption();
+		src.Batch_Exemption_Page_UI();
+
+	}
+	@Test(priority = 60, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_UI_of_Create_Limited_Exemption_Batch_page() throws Exception {
+		// testCaseId="39602";
+		sc = new publicHomePage(driver, prop);
+		src = new Registry_Module3_MLE(driver);
+		sc.selectJurisdiction("California");
+		sc.loginFunctionality("California", "JurisdictionAdmin");
+		sc.secQueAns();
+		src.SelectEntityId();
+		src.navigateToBatchExemption();
+		src.navigateToCreateLimitedExemptionBatch();
+		src.Create_LImited_Exemption_Batch_UI();
+	}
+	@Test(priority = 61, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Limited_Exemption_field_on_the_Create_Limited_Exemption_page() throws Exception{
+		// testCaseId="39647";
+		sc = new publicHomePage(driver, prop);
+		src = new Registry_Module3_MLE(driver);
+		sc.selectJurisdiction("California");
+		sc.loginFunctionality("California", "JurisdictionAdmin");
+		sc.secQueAns();
+		src.navigateToBatchExemption();
+		src.navigateToCreateLimitedExemptionBatch();
+		src.createBatch();
+		src.Limited_Exemptions_Field_Validation();
+	}
+	@Test(priority = 62, retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Validation_of_comma_seperated_numeric_values_Limited_Exemption_for_Upload_File_functionality_on_Create_Limited_Exemption_page() throws Exception{
+		// testCaseId="39895"
+		sc = new publicHomePage(driver, prop);
+		src = new Registry_Module3_MLE(driver);
+		sc.selectJurisdiction("California");
+		sc.loginFunctionality("California", "JurisdictionAdmin");
+		sc.secQueAns();
+		src.navigateToBatchExemption();
+		src.navigateToCreateLimitedExemptionBatch();
+		src.createBatch();
+		src.UploadFile_CommaSeprated_Limited_Exemption();
 	}
 
 }
