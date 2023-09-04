@@ -220,7 +220,8 @@ public class Registry_Module3_MCII_Test extends base{
 		PH.secQueAns();
 		MCII.Navigate_To_IssuanceAccount();
 		MCII.navigateToAllowanceIssuancePage();
-		MCII.ProposeAllowanceIssuance_SubType();	
+		MCII.ProposeAllowanceIssuance_SubType();
+		MCII.verifyTransferEventHistoryTable_ProposeAllowanceIssuance();
 		MCII.navigateToIssuanceRecordsPage_MegaMenu();
 		MCII.search_TransferId_IssuanceRecordGrid();
 	}
@@ -658,5 +659,38 @@ public class Registry_Module3_MCII_Test extends base{
 		PH.loginFunctionality("California", "WciincAdmin");
 		PH.secQueAns();
 		MCII.verify_Quantity_against_Allowance_Outstanding_for_Reserve_Adjusted_Allowance_Budget_ForFirstTime();
+	}
+	
+	@Test(priority=49,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Validation_of_Quantity_field_on_Allowance_Issuance_page() throws Exception {
+		//testCaseId ="39585"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.validateQuantityField_AllowanceIssuance();
+	}
+	
+	@Test(priority=50,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_update_issuance_records_after_allowance_issuance_is_proposed() throws Exception {
+		//testCaseId ="39957"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.verifyIssuanceRecord_AllowanceIssuanceProposal();
+	}
+	
+	@Test(priority=51,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Validation_of_Quantity_against_Reserve_Budget_for_Price_Containment_Reserve_Allowance_Issuance() throws Exception {
+		//testCaseId ="39958"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.validateQuantity_PCRAIssuance();
 	}
 }

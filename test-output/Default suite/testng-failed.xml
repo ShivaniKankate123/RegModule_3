@@ -7,8 +7,8 @@
         <methods>
           <include name="setup"/>
           <include name="sentReportToTheMail"/>
+          <include name="Validation_of_Quantity_against_Reserve_Budget_for_Price_Containment_Reserve_Allowance_Issuance"/>
           <include name="closeBrowser"/>
-          <include name="Verification_of_Start_and_End_Reporting_Period_on_Offset_Issuance_Page"/>
           <include name="addResultToTestrail"/>
           <include name="start"/>
         </methods>

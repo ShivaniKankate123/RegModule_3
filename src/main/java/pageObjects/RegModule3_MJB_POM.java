@@ -33,6 +33,8 @@ public class RegModule3_MJB_POM {
 	CommonMethods CM;
 	Properties prop;
 	publicHomePage PH;
+//	String ReserveBudget;
+	String ReserveAllowancesIssued;
 
 	// All Jurisdiction Page for WCI Inc Admin
 	@FindBy(xpath = "//*[@id='panel1a-header']")
@@ -403,6 +405,14 @@ public class RegModule3_MJB_POM {
 	WebElement BudgetYearValue;
 	@FindBy(xpath = "//p[text()='Testing Purpose']")
 	WebElement AddedComment;
+	
+	//All Budget Records
+	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body1 css-7myxtt'])[2]")
+	WebElement ReserveBudgetValue;
+	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body1 css-7myxtt'])[3]")
+	WebElement ReserveAllowancesIssuedValue;
+	
+	
 
 	public RegModule3_MJB_POM(WebDriver driver) {
 		PageFactory.initElements(driver, this);

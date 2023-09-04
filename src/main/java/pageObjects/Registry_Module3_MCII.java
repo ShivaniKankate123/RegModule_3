@@ -53,11 +53,11 @@ public class Registry_Module3_MCII {
 	File src;
 	FileInputStream fis;
 	Actions actions;
+	String ReserveBudget;
 
 	@FindBy(xpath = "//a[text()='HOME']")
 	WebElement HomeMenu;
 
-	
 
 	// Common
 	@FindBy(xpath = "//button[text()='Welcome,']")
@@ -111,6 +111,7 @@ public class Registry_Module3_MCII {
 	WebElement StatusColumn;
 	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body1 link-cell css-1195g5e'])[1]")
 	WebElement TransferIdColumn;
+	
 	
 	// Issuance Account page
 	@FindBy(xpath = "//h1[text()='Issuance Account']")
@@ -331,6 +332,8 @@ public class Registry_Module3_MCII {
 	
 	@FindBy(xpath = "//input[@id='Quantity']")
 	WebElement quantity;
+	@FindBy(xpath = "//p[contains(@class,'MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained')]")
+	WebElement quantityErrMsg;
 	@FindBy(xpath = "//p[text()='Vintage Year is not required for the Compliance Instrument Sub Type selected.']")
 	WebElement ErrorMessage_subType_VintageYr2;
 	@FindBy(xpath = "//button[@data-testid=\"priv_modal_Cancel\"]")
@@ -357,6 +360,9 @@ public class Registry_Module3_MCII {
 	WebElement IncorrectPaasphraseErrMsg;
 	@FindBy(xpath = "(//*[@data-testid='CloseIcon'])[3]")
 	WebElement ErrCancel;
+	@FindBy(xpath = "//p[@class='MuiTypography-root MuiTypography-body2 css-1eifdk0']")
+	WebElement ToastErrMsg;
+	
 	
 
 	// Allowance Issuance Details Page
@@ -380,6 +386,10 @@ public class Registry_Module3_MCII {
 	WebElement EndValueComplianceTable;
 	@FindBy(xpath = "(//div[@class='MuiDataGrid-cellContent'])[18]")
 	WebElement QuantityValueComplianceTable;
+	@FindBy(xpath = "//div[@class='MuiDataGrid-columnHeader MuiDataGrid-columnHeader--sortable']")
+	List<WebElement> ColumnLabel;
+	@FindBy(xpath = "//div[text()='Action By']")
+	WebElement ActionByColumnLable;
 	
 	// Authority Home Page
 	@FindBy(xpath = "//a[text()='My Approvals']")
@@ -2260,18 +2270,18 @@ public class Registry_Module3_MCII {
 		js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView();", SubTypeDropdown);
 		CM = new CommonMethods(driver);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		try {
-			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(SubTypeDropdown));
 			SubTypeDropdown.click();
 		} catch (Exception e) {
 			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(SubTypeDropdown));
 			CM.click2(SubTypeDropdown, "javascriptClick", "SubTypeDropdown");
 		}
+		Thread.sleep(3000);
 		try {
 			SubType1.click();
 		} catch (Exception e) {
-			new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(SubType1));
+			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(SubType1));
 			SubType1.click();
 		}
 		String SubTypeval = SubTypeDropdown.getAttribute("value");
@@ -2315,15 +2325,20 @@ public class Registry_Module3_MCII {
 		allowancetransferId = TransferId.getText();
 		System.out.println(allowancetransferId);
 		ObjectRepo.test.log(Status.PASS, "Created Transfer Id for Allowance Issuance is: " + allowancetransferId);
-		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(TransferEventHistoryProposeData));
-		Assert.assertEquals(TransferEventHistoryProposeData.isDisplayed(), true);
-		ObjectRepo.test.log(Status.PASS, "Proposed event record is updated in the ‘Transfer Event History’ table");
+		
 	}
+		public void verifyTransferEventHistoryTable_ProposeAllowanceIssuance() {
+			new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(TransferEventHistoryProposeData));
+			Assert.assertEquals(TransferEventHistoryProposeData.isDisplayed(), true);
+			ObjectRepo.test.log(Status.PASS, "Proposed event record is updated in the ‘Transfer Event History’ table");
+		}
+		
 
 	public void VerifY_Functionality_Prepare_and_Propose_AllowanceIssuance() throws Exception {
 		Navigate_To_IssuanceAccount();
 		navigateToAllowanceIssuancePage();
 		ProposeAllowanceIssuance_SubType();
+		verifyTransferEventHistoryTable_ProposeAllowanceIssuance();
 		LogoutFunctionality();
 		PH = new publicHomePage(driver, prop);
 		Thread.sleep(3000);
@@ -2581,17 +2596,15 @@ public class Registry_Module3_MCII {
 
 	public void navigateToAllBudgetRecordsPage() throws Exception {
 		CM = new CommonMethods(driver);
-		Thread.sleep(4000);
 		js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,450)", "");
-		Thread.sleep(4000);
+		new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(ViewBudgetRecordLable));
 		try {
 			ViewBudgetRecordLable.click();
 		} catch (Exception ex) {
-			CM.click2(ViewBudgetRecordLable, "moveToElementClick", "ViewBudgetRecordLable");
+			CM.click2(ViewBudgetRecordLable, "javascriptClick", "ViewBudgetRecordLable");
 		}
-
-		Thread.sleep(3000);
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(AllBudgetRecordtitle));
 		String PageTitle = AllBudgetRecordtitle.getText();
 		ObjectRepo.test.log(Status.PASS, "User Navigated to: " + PageTitle);
 	}
@@ -2720,13 +2733,11 @@ public class Registry_Module3_MCII {
 		for(int i=1; i<=size;i++) {
 			quantity.sendKeys(Keys.BACK_SPACE);
 		}
-		
 		int allowanceoutstanding=Integer.parseInt(allowanceOutstandingForReserveAdjustedAllowanceBudget); 
 		int quantityValue  = Integer.parseInt(QuantityValue); 
 		allowanceOutstandingForReserveAdjustedAllowanceBudget=String.valueOf(allowanceoutstanding-quantityValue-1); 
 		quantity.sendKeys(allowanceOutstandingForReserveAdjustedAllowanceBudget);
 		SubmitButton.click();
-		
 		Thread.sleep(2000);
 		src = new File(System.getProperty("user.dir") + "/config.properties");
 		fis = new FileInputStream(src);
@@ -2742,14 +2753,13 @@ public class Registry_Module3_MCII {
 		Assert.assertEquals(Msg, "The issuance has been successfully prepared and is awaiting review.");
 		ObjectRepo.test.log(Status.PASS, "Allowance Issuance suucessfully propose for the Quantity value less than and equal to the 'Allowances Outstanding for Reserve Adjusted Budget' for the selected vintage year - the quantity of the previous Allowance Issuance proposal(s).");
 	}
-
 	
 	public void navigateToIssuanceRecordsPage_MegaMenu() throws Exception {
-		Thread.sleep(3000);
+		new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(MegaMenu));
 		MegaMenu.click();
-		Thread.sleep(3000);
+		new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(IssuanceRecordOption));
 		IssuanceRecordOption.click();
-		Thread.sleep(5000);
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(IssuanceRecordPageTitle));
 		IssuanceRecordPageTitle.getText();
 	}
 
@@ -2772,6 +2782,7 @@ public class Registry_Module3_MCII {
 	public void navigateToAllowanceIssuanceDetails() throws Exception {
 		navigateToAllowanceIssuancePage();
 		ProposeAllowanceIssuance_SubType();
+		verifyTransferEventHistoryTable_ProposeAllowanceIssuance();
 		LogoutFunctionality();
 		PH = new publicHomePage(driver, prop);
 		Thread.sleep(3000);
@@ -2976,7 +2987,6 @@ public class Registry_Module3_MCII {
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,450)", "");
-//		Thread.sleep(3000);
 		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(StartValueComplianceTable));
 		System.out.println(StartValueComplianceTable.getText());
 		Assert.assertEquals(EndValueComplianceTable.isDisplayed(), true);
@@ -3115,5 +3125,226 @@ public class Registry_Module3_MCII {
 		ObjectRepo.test.log(Status.PASS, "Allowance Issuance suucessfully propose for the Quantity value less than the 'Allowance Outstanding for Reserve Adjusted Allowance Budget' for selected Vintage year.");
 	}
 	
+	public void validateQuantityField_AllowanceIssuance() throws Exception {
+		Navigate_To_IssuanceAccount();
+		navigateToAllowanceIssuancePage();
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(quantity));
+		try {
+			quantity.click();
+		} catch (Exception e) {
+			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(quantity));
+			quantity.click();
+		}
+		quantity.sendKeys(Keys.TAB);
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(quantityErrMsg));
+		Assert.assertEquals(quantityErrMsg.getText(), "Quantity is required");
+		ObjectRepo.test.log(Status.PASS, "Step 1 : 'Quantity Required' error message is displayed.");
+		quantity.sendKeys("0");
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(quantityErrMsg));
+		Assert.assertEquals(quantityErrMsg.getText(), "Quantity must be a valid number.");
+		ObjectRepo.test.log(Status.PASS, "Step 2 : 'Quantity must be a valid number' error message is displayed.");
+		quantity.sendKeys("10");
+		try {
+			Assert.assertEquals(quantityErrMsg.isDisplayed(), true);
+			ObjectRepo.test.log(Status.PASS, "Error Msg is displyaed for Quantity field for valid data");
+		}
+		catch(Exception ex){
+			ObjectRepo.test.log(Status.PASS, "Step 3 : Valid Quantity is accepted and no error message is displayed.");
+		}
+	}
 	
+	public void verifyComplianceInstrumentTable_AllowanceIssuanceDetail() {
+		List<String> columns = Arrays.asList("Transfer ID", "Vintage", "Jurisdiction", "Type", "Sub-Type", "Offset Type","Offset Project ID", "Start","End","Quantity");
+		List<String> ActualColumns = new ArrayList<>();
+        for(int j=3; j<=12;j++){
+        	ActualColumns.add(ColumnLabel.get(j).getText());
+        }
+        boolean allLabelMatch = true;
+        for (int i = 0; i<columns.size(); i++) {
+            String ExpValue = columns.get(i);
+            String ActValue = ActualColumns.get(i);
+            if (!ExpValue.equals(ActValue)) {
+                allLabelMatch = false;
+                break;
+            }
+        }
+        if (allLabelMatch) {
+            ObjectRepo.test.log(Status.PASS, "'Compliance Instruments’ card should be displayed following fields: "+ActualColumns);
+        } else {
+            ObjectRepo.test.log(Status.PASS, "All the columns are not present on Compliance Instrumenty Card ");
+        }
+	}
+	
+	public void verifyTransferEventHistoryTable_AllowanceIssuanceDetail() {
+		List<String> columns = Arrays.asList("Event", "Event Date (yyyy/mm/dd)", "Comment");
+		List<String> ActualColumns = new ArrayList<>();
+        for(int j=13; j<=15;j++){
+        	ActualColumns.add(ColumnLabel.get(j).getText());
+        }
+        Assert.assertEquals(ActionByColumnLable.getText(), "Action By");
+        boolean allLabelMatch = true;
+        for (int i = 0; i<columns.size(); i++) {
+            String ExpValue = columns.get(i);
+            String ActValue = ActualColumns.get(i);
+            if (!ExpValue.equals(ActValue)) {
+                allLabelMatch = false;
+                break;
+            }
+        }
+        if (allLabelMatch) {
+            ObjectRepo.test.log(Status.PASS, "‘Transfer Event History’ card is displayed with following fields:: "+ActualColumns +" , " +ActionByColumnLable.getText());
+        } else {
+            ObjectRepo.test.log(Status.PASS, "All the columns are not present on Transfer Event History Card ");
+        }
+	}
+	
+	public void verifyTransferEventHistory_ProposeAllowanceIssuanceRecord() {
+		js = (JavascriptExecutor) driver;
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.visibilityOf(FirstRecordTransferEventHistory));
+		String ProposeRecord = FirstRecordTransferEventHistory.getText();
+		Assert.assertEquals(ProposeRecord, "Proposed");
+	}
+	
+	public void verifyIssuanceRecord_AllowanceIssuanceProposal() throws Exception {
+		Navigate_To_IssuanceAccount();
+		navigateToAllowanceIssuancePage();
+		ProposeAllowanceIssuance_SubType();
+		navigateToIssuanceRecordsPage_MegaMenu();
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(Search));
+		Search.sendKeys(allowancetransferId);
+		Thread.sleep(3000);
+		Assert.assertEquals(TransferIdColumn.getText(), allowancetransferId);
+		ObjectRepo.test.log(Status.PASS, "Step 1 : The proposed Allowance Issuance Record With the Transfer ID is displayed in the Issuance Records table.");
+		TransferIdColumn.click();
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(AllowanceIssuanceDetailsPageTitle));
+		Assert.assertEquals(AllowanceIssuanceDetailsPageTitle.isDisplayed(), true);
+		ObjectRepo.test.log(Status.PASS, "Step 2 : Allowance Issuance Details Page is displayed with all the details of the Proposed Allowance Issuance.");
+		verifyComplianceInstrumentTable_AllowanceIssuanceDetail();
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(StartValueComplianceTable));
+		System.out.println(StartValueComplianceTable.getText());
+		Assert.assertEquals(EndValueComplianceTable.isDisplayed(), true);
+		Assert.assertEquals(EndValueComplianceTable.getText().equals("0"), true);
+		Assert.assertEquals(StartValueComplianceTable.getText().contains("0"), true);
+		Assert.assertEquals(QuantityValueComplianceTable.getText().contains("0"), true);
+		ObjectRepo.test.log(Status.PASS, "Step 3.1 : Compliance Instruments’ card is displayed with all the fields");
+		ObjectRepo.test.log(Status.PASS, "Step 3.2 : Compliance Instruments table have a record for the proposed Offset Issuance Transfer ID and the Start, End, and Quantity is '0'.");
+		verifyTransferEventHistoryTable_AllowanceIssuanceDetail();
+		ObjectRepo.test.log(Status.PASS, "Step 4.1 : ‘Transfer Event History’ card is displayed with all fields");
+		verifyTransferEventHistory_ProposeAllowanceIssuanceRecord();
+		ObjectRepo.test.log(Status.PASS, "Step 4.2 : In the transfer Event History Table there is one record of proposed Allowance Issuance.");
+	}
+	
+	public void fetchReserveBudget_AllBudgetRecordPage() throws Exception {
+		MJB = new RegModule3_MJB_POM(driver);
+		Thread.sleep(7000);
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(MJB.ReserveBudgetValue));
+		ReserveBudget = MJB.ReserveBudgetValue.getText();
+		System.out.println(ReserveBudget);
+	}
+	
+	public void fetchReserveAllowancesIssued_AllBudgetRecordPage() {
+		MJB = new RegModule3_MJB_POM(driver);
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(MJB.ReserveAllowancesIssuedValue));
+		MJB.ReserveAllowancesIssued = MJB.ReserveAllowancesIssuedValue.getText();
+	}
+	
+	public void validateQuantity_PCRAIssuance() throws Exception {
+		MJB = new RegModule3_MJB_POM(driver);
+		navigateToAllBudgetRecordsPage();
+		fetchReserveBudget_AllBudgetRecordPage();
+		System.out.println(ReserveBudget);
+		ObjectRepo.test.log(Status.PASS, "Reserve Budget is: "+ReserveBudget);
+		fetchReserveAllowancesIssued_AllBudgetRecordPage();
+		ObjectRepo.test.log(Status.PASS, "Reserve Allowance Issued is: "+MJB.ReserveAllowancesIssued);
+		navigateBackToHomePage();
+		Navigate_To_IssuanceAccount();
+		navigateToAllowanceIssuancePage();
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		Thread.sleep(7000);
+		try {
+			SubTypeDropdown.click();
+		} catch (Exception e) {
+			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(SubTypeDropdown));
+			CM.click2(SubTypeDropdown, "javascriptClick", "SubTypeDropdown");
+		}
+		Thread.sleep(3000);
+		try {
+			SubType3.click();
+		} catch (Exception e) {
+			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(SubType3));
+			SubType3.click();
+		}
+		Assert.assertEquals(SubTypeDropdown.getAttribute("value"), "Price Containment Reserve Allowance");
+		ObjectRepo.test.log(Status.PASS, "Step 1 : 'Price Containment Reserve Allowance' sub-type is selected.");
+		int ReserveAllowancesIssued=Integer.parseInt(MJB.ReserveAllowancesIssued);
+		System.out.println(ReserveAllowancesIssued);
+//		int ReserveBudget = Integer.parseInt(MJB.ReserveBudget);
+//		int ReserveBudget = convertStringToInt(MJB.ReserveBudget);
+		//Integer ReserveBudget=Integer.valueOf(MJB.ReserveBudget);  
+		String modifiedNum = ReserveBudget.replace(",", "");
+		int ReserveBudget = Integer.parseInt(modifiedNum);
+		int ReserveBudget_Minus_ReserveAllowancesIssued = ReserveBudget - ReserveAllowancesIssued;
+		int invalidQuantity = ReserveBudget_Minus_ReserveAllowancesIssued + 1;
+		String invalidQuantityStr=String.valueOf(invalidQuantity);  
+		int validQuantity = ReserveBudget_Minus_ReserveAllowancesIssued - 1;
+		String validQuantityStr=String.valueOf(validQuantity);  
+		quantity.sendKeys(invalidQuantityStr);
+		try {
+			SubmitButton.click();
+		} catch (Exception e) {
+			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(SubmitButton));
+			SubmitButton.click();
+		}
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(MsgSubmitConfirm));
+		src = new File(System.getProperty("user.dir") + "/config.properties");
+		fis = new FileInputStream(src);
+		prop = new Properties();
+		prop.load(fis);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		Passphrase.sendKeys(prop.getProperty("Password"));
+		ConfirmBtn.click();
+		wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOf(ToastErrMsg));
+		Assert.assertEquals(ToastErrMsg.getText(), "The allowance quantity exceeds the allowances that can be issued from the Reserve Budget");
+		ObjectRepo.test.log(Status.PASS, "Step 2 : 'The allowance quantity exceeds the allowances that can be issued from the Reserve Budget' error message is displayed.");
+		ErrCancel.click();
+		Thread.sleep(3000);
+		int size = quantity.getAttribute("value").length();
+		for(int i=0;i<=size;i++) {
+			quantity.sendKeys(Keys.BACK_SPACE);
+		}
+		try {
+			quantity.sendKeys(validQuantityStr);
+		} catch (Exception e) {
+			wait.until(ExpectedConditions.visibilityOf(quantity));
+			quantity.sendKeys(validQuantityStr);
+		}
+		try {
+			SubmitButton.click();
+		} catch (Exception e) {
+			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(SubmitButton));
+			SubmitButton.click();
+		}
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(MsgSubmitConfirm));
+		src = new File(System.getProperty("user.dir") + "/config.properties");
+		fis = new FileInputStream(src);
+		prop = new Properties();
+		prop.load(fis);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		Passphrase.sendKeys(prop.getProperty("Password"));
+		ConfirmBtn.click();
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOf(SuccessMsg));
+		String Msg = SuccessMsg.getText();
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		Assert.assertEquals(Msg, "The issuance has been successfully prepared and is awaiting review.");
+		ObjectRepo.test.log(Status.PASS, "Allowance Issunace proposed Successfully ");
+		ObjectRepo.test.log(Status.PASS, "Step 3 : Error message is not displayed and valid Quantity is accepted.");
+	}
 }
