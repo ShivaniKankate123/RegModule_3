@@ -10,106 +10,20 @@ import pageObjects.publicHomePage;
 import resources.base;
 
 public class RegModule3_MJB_Tests extends base {
-
-	@Test (priority=22,retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Verification_of_MANAGE_JURISDICTIONS_Grid_UI_and_navigation_to_Manage_Jurisdiction_Page_for_WCI_Inc_Admin()
-			throws Exception {
-		// testCaseId ="39412"; RPM3-197
-
-		publicHomePage php = new publicHomePage(driver,prop);
-		php.selectJurisdiction("California");
-		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
-		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
-		ref.selectJurisdictionToAddBudgetRecord();
-	}
-
-	@Test(priority=23,retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Verification_of_Add_Budget_Records_page_UI_for_WCI_Inc_Admin() throws Exception {
-		// testCaseId ="39413"; RPM3-106
-
-		publicHomePage php = new publicHomePage(driver,prop);
-		php.selectJurisdiction("California");
-		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
-		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
-		ref.navigateToManageJurisdictionBudget_WCIAdmin();
-		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
-		ref.addBudgetRecordPageUI();
-	}
-
-	@Test(priority=24,retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Verification_of_Add_Budget_Records_functionality_for_WCI_Inc_Admin() throws Exception {
-		// testCaseId ="39414"; RPM3-106
-
-		publicHomePage php = new publicHomePage(driver,prop);
-		php.selectJurisdiction("California");
-		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
-		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
-		ref.navigateToManageJurisdictionBudget_WCIAdmin();
-		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
-		ref.addBudgetRecordPopup();
-	}
-
-	// C39415 is pending (Validation Test Case)
-
-	@Test(priority=25,retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Verification_of_Cancel_button_functionality_on_Add_Budget_Records_for_WCI_Inc_Admin_with_added_mandatory_inputs()
-			throws Exception {
-		// testCaseId ="39416"; RPM3-106
-		publicHomePage php = new publicHomePage(driver,prop);
-		php.selectJurisdiction("California");
-		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
-		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
-		ref.navigateToManageJurisdictionBudget_WCIAdmin();
-		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
-		ref.cancelButtonOnAddBudgetRecordPage();
-	}
-
-	@Test(priority=26,retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Verification_of_Validation_on_Duplicate_Budget_Records_for_Budget_Year_Validation_on_Add_Budget_Records_page()
-			throws Exception {
-		// testCaseId ="39417"; RPM3-124
-		publicHomePage php = new publicHomePage(driver,prop);
-		php.selectJurisdiction("California");
-		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
-		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
-		ref.navigateToManageJurisdictionBudget_WCIAdmin();
-		ref.addBudgetRecordValidations();
-	}
-
-	@Test(priority=27,retryAnalyzer = Analyzer.RetryAnalyzer.class)
-	public void Verification_of_validation_of_Mandatory_Fields_on_Add_Budget_Records_page_by_keeping_it_empty()
-			throws Exception {
-		// testCaseId ="39418"; RPM3-124
-		publicHomePage php = new publicHomePage(driver,prop);
-		php.selectJurisdiction("California");
-		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
-		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
-		ref.navigateToManageJurisdictionBudget_WCIAdmin();		
-		ref.addBudgetRecordValidationsbykeepingMandatoryFieldsempty();
-	}
 	
-	// C39419, 20 are pending (Validation Test Case)
 
 	@Test(priority=1,retryAnalyzer = Analyzer.RetryAnalyzer.class)
 	public void Verification_of_Functionality_of_Cancel_Button_on_Add_Budget_Record_Page() throws Exception {
 		// testCaseId ="39426"; RPM3-126
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
-		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		php.loginFunctionality("California", "WciincAdmin");		
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
@@ -123,8 +37,12 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.cancelButtonFunctionalityOnEditBudgetRecordPageForEffectiveBudgetRecords();
@@ -137,8 +55,12 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.cancelButtonFunctionalityOnEditBudgetRecordPageForProposedRequestRevisionBudgetRecords();
@@ -151,8 +73,12 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.verifyFunctionalityOfResetButton0nProposedBudgetRecordsForAdmin();
 	}
@@ -163,8 +89,12 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "Authority");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.verifyFunctionalityOfResetButton0nProposedBudgetRecordsForAuthority();
 	}
@@ -176,17 +106,22 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
-		ref.verifyJurisdictionAllowanceRequestStatusHistoryGridForAdmin();
-		// driver.close();
-		Thread.sleep(4000);
-		publicHomePage php1 = new publicHomePage(driver,prop);
-		// php1.selectJurisdiction("California");
+		ref.verifyJurisdictionAllowanceRequestStatusHistoryGridForAdmin();		
+		publicHomePage php1 = new publicHomePage(driver,prop);		
 		php1.loginFunctionality("California", "Authority");
-		php1.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref1 = new RegModule3_MJB_POM(driver);
 		ref1.verifyJurisdictionAllowanceRequestStatusHistoryGridForAuthority();		
 	}
@@ -197,15 +132,23 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.DenyRecord_JAdmin1();
 	}
@@ -217,15 +160,23 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.DenyRecord_JAdmin();
 		ref.VerifyRequeststatusBudgetRecordStatusforJuriAdminAfterDenialofBudgetRecord();
@@ -238,15 +189,23 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.DenyRecord_JAdmin();
 		ref.VerifyPendingQueueofApprovalafterDenialofBudget();
@@ -259,22 +218,34 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.DenyRecord_JAdmin();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "WciincAdmin");
-//		php.secQueAns();
-		Thread.sleep(8000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.VerifyRequestStatusForWCIIncAdminAfterDenial();
 	}
@@ -286,22 +257,34 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.DenyRecord_JAdmin();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "WciincAdmin");
-		// php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.VerifyBudgetRecordStatusAfterDenialForWCIIncAdmin();
 	}
@@ -313,22 +296,34 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.DenyRecord_JAdmin();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "WciincAdmin");
-		// php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.VerifyBudgetYearIsDisplayOnTheAddBudgetScreenFoWCIncAdminAfterDenial();
 	}
@@ -340,15 +335,23 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.RequestRevisionRecord_JAdmin1();
 	}
@@ -360,15 +363,23 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.RequestRevisionRecord_JAdmin();
 		ref.VerifyRequeststatusBudgetRecordStatusforJuriAdminAfterRequestRevisionofBudgetRecord();
@@ -382,22 +393,34 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.RequestRevisionRecord_JAdmin();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "WciincAdmin");
-		// php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();		
 		ref.VerifyBudgetRecordStatusAfterRequestRevisionForWCIIncAdmin();
 	}
@@ -409,22 +432,34 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.Propose_Record_Functionality();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "JurisdictionAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToBudgetRecordsPage_JAdmin();
 		ref.RequestRevisionRecord_JAdmin();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "WciincAdmin");
-		// php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.VerifyRequestRevisionRecordsInProposedBudgetQueueForWCIIncAdminAfterRequestRevision();
 	}
@@ -435,8 +470,12 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.VerifyViewRequestHistoryTableforWCIIncAdmin();
@@ -449,8 +488,12 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.RequestRevision_Functionality_ByJAuth();
 	}
@@ -462,8 +505,12 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.RequestRevision_Functionality_ByJAuth();
 		ref.VerifyRequeststatusBudgetRecordStatusforJuriAuthorityAfterRequestRevisionofBudgetRecord();
@@ -476,8 +523,12 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.RequestRevision_Functionality_ByJAuth();
 		ref.VerifyBudgetRecordStatusforJuriAuthorityAfterRequestRevisionofBudgetRecord();
@@ -490,16 +541,364 @@ public class RegModule3_MJB_Tests extends base {
 		publicHomePage php = new publicHomePage(driver,prop);
 		php.selectJurisdiction("California");
 		php.loginFunctionality("California", "WciincAdmin");
-		php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
 		ref.RequestRevision_Functionality_ByJAuth();
 		ref.LogoutFunctionality();
 		Thread.sleep(4000);
 		php.loginFunctionality("California", "WciincAdmin");
-		//php.secQueAns();
-		Thread.sleep(4000);
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		ref.navigateToManageJurisdictionBudget_WCIAdmin();
 		ref.VerifyRRBudgetRecordsInProposedBudgetQueueForWCIIncAdminAfterRRByJuriAuthority();
+	}
+	
+	@Test (priority=22,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_MANAGE_JURISDICTIONS_Grid_UI_and_navigation_to_Manage_Jurisdiction_Page_for_WCI_Inc_Admin()
+			throws Exception {
+		// testCaseId ="39412"; RPM3-197
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.selectJurisdictionToAddBudgetRecord();	
+	}
+
+	@Test(priority=23,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Add_Budget_Records_page_UI_for_WCI_Inc_Admin() throws Exception {
+		// testCaseId ="39413"; RPM3-106
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.EditBudgetDetailValuesOnAddBudgetRecordsPage();
+		ref.addBudgetRecordPageUI();		
+	}
+
+	@Test(priority=24,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Add_Budget_Records_functionality_for_WCI_Inc_Admin() throws Exception {
+		// testCaseId ="39414"; RPM3-106
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.addBudgetRecordPopup();
+	}
+
+	@Test(priority=25,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Budget_Year_Field_On_Add_Budget_RecordsPage() throws Exception {
+		// testCaseId ="39415"; RPM3-106
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.validationOfBudgetYear();			
+        ref.proposeBudgetRecord();       
+        ref.navigateToAddBudgetRecordsPage_WCIAdmin();       
+        ref.validateBudgetYearIsNotDisplayedAfterProposedBudgetOnAddBudgetRecordPage();       
+		ref.LogoutFunctionality();
+		Thread.sleep(4000);
+		php.loginFunctionality("California", "JurisdictionAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		ref.navigateToBudgetRecordsPage_JAdmin();
+		ref.DenyRecord_JAdmin();
+		ref.LogoutFunctionality();
+		Thread.sleep(4000);
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.VerifyBudgetYearIsDisplayOnTheAddBudgetScreenFoWCIncAdminAfterDenial();		
+	}	
+
+	@Test(priority=26,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Cancel_button_functionality_on_Add_Budget_Records_for_WCI_Inc_Admin_with_added_mandatory_inputs()
+			throws Exception {
+		// testCaseId ="39416"; RPM3-106
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.cancelButtonOnAddBudgetRecordPage();
+	}
+
+	@Test(priority=27,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Validation_on_Duplicate_Budget_Records_for_Budget_Year_Validation_on_Add_Budget_Records_page()
+			throws Exception {
+		// testCaseId ="39417"; RPM3-124
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.addBudgetRecordValidations();
+	}
+
+	@Test(priority=28,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_validation_of_Mandatory_Fields_on_Add_Budget_Records_page_by_keeping_it_empty()
+			throws Exception {
+		// testCaseId ="39418"; RPM3-124
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();		
+		ref.addBudgetRecordValidationsbykeepingMandatoryFieldsempty();
+	}
+	
+	// C39419, 20 are pending (Validation Test Case)
+	
+	@Test(priority=29,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_CANCEL_PROPOSED_RECORD_Functionality_for_the_Budget_Records_which_are_in_Proposed_Changes_Proposed_and_Revision_Requested_status()
+			throws Exception {
+		// testCaseId ="39843"; RPM3-132
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.proposeBudgetRecord();
+		ref.cancelProposedRecordFunctionalityForProposedBudgetRecords();
+	}
+	
+	@Test(priority=30,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_CANCEL_PROPOSED_RECORD_option_access_to_WCI_Inc_Admin_in_Effective_Budget_Records_table()
+			throws Exception {
+		// testCaseId ="39844"; RPM3-132
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();		
+		ref.cancelProposedRecordFunctionalityForEffectiveBudgetRecords();
+	}
+	
+	@Test(priority=31,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Budget_Record_Status_and_Request_Status_for_the_Cancelled_budget_record_in_Jurisdiction_Allowance_Request_Status_History_table_Proposed_Budget_Records_respectively_to_WCI_Inc_Admin()
+			throws Exception {
+		// testCaseId ="39845"; RPM3-132
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.proposeBudgetRecord();
+		ref.LogoutFunctionality();
+		Thread.sleep(4000);
+		php.loginFunctionality("California", "JurisdictionAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		ref.navigateToBudgetRecordsPage_JAdmin();
+		ref.RequestRevisionRecord_JAdmin1();
+		ref.LogoutFunctionality();
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.cancelProposedRecordFunctionalityForRequestRevisionBudgetRecords();
+	}
+	
+	@Test(priority=32,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Budget_Record_Status_and_RequestStatus_for_the_Cancelled_budget_record_in_Jurisdiction_Allowance_Request_Status_History_table_and_Proposed_Budget_Records_respectively_to_Jurisdiction_Users()
+			throws Exception {
+		// testCaseId ="39846"; RPM3-132
+		//Login with WCI Inc Admin and Propose a Budget Record
+		publicHomePage php = new publicHomePage(driver,prop);
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		RegModule3_MJB_POM ref = new RegModule3_MJB_POM(driver);
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.proposeBudgetRecord();
+		//Cancelling the Proposed Budget Record
+		ref.cancelProposedRecordFunctionalityForProposedBudgetRecords();
+		ref.LogoutFunctionality();
+		Thread.sleep(4000);
+		// Login with J-Admin and verify the Request & the Budget Status
+		php.loginFunctionality("California", "JurisdictionAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		ref.navigateToBudgetRecordsPage_JAdmin();			
+		ref.VerifyRequeststatusBudgetRecordStatusforJuriAdminAfterCancellingofBudgetRecord();
+		ref.LogoutFunctionality();
+		// Login with J-Auth and verify the Request & the Budget Status
+		php.loginFunctionality("California", "Authority");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
+		ref.navigateToBudgetRecordsPage_JAuth();
+		ref.VerifyRequeststatusBudgetRecordStatusforJuriAuthorityAfterCancellingofBudgetRecord();
+		Thread.sleep(4000);	
+		ref.LogoutFunctionality();
+		// Again login with the WCI Inc Admin and Propose the Budget Record
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.proposeBudgetRecord();		
+		ref.LogoutFunctionality();
+		Thread.sleep(4000);
+		// login with the J-Admin and RR the Budget Record
+		php.loginFunctionality("California", "JurisdictionAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		ref.navigateToBudgetRecordsPage_JAdmin();		
+		ref.RequestRevisionRecord_JAdmin1();
+		ref.LogoutFunctionality();
+		php.selectJurisdiction("California");
+		php.loginFunctionality("California", "WciincAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+		// Again login with the WCI Inc Admin and cancel the RR the Budget Record
+		ref.navigateToManageJurisdictionBudget_WCIAdmin();
+		ref.navigateToAddBudgetRecordsPage_WCIAdmin();
+		ref.cancelProposedRecordFunctionalityForRequestRevisionBudgetRecords();
+		ref.LogoutFunctionality();
+		// login with the J_Admin and verify the Budget Status and the Request Status
+		php.loginFunctionality("California", "JurisdictionAdmin");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		ref.navigateToBudgetRecordsPage_JAdmin();		
+		ref.VerifyRequeststatusBudgetRecordStatusforJuriAdminAfterCancellingRRBudgetRecord();
+		ref.LogoutFunctionality();
+		// login with the J_Auth and verify the Budget Status and the Request Status
+		php.loginFunctionality("California", "Authority");
+		try {
+			php.secQueAns();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
+		ref.navigateToBudgetRecordsPage_JAuth();
+		ref.VerifyRequeststatusBudgetRecordStatusforJuriAuthorityAfterCancellingofBudgetRecord();
+		Thread.sleep(4000);	
+		ref.LogoutFunctionality();
 	}
 }

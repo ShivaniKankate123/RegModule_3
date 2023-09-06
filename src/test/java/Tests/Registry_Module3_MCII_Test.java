@@ -693,4 +693,126 @@ public class Registry_Module3_MCII_Test extends base{
 		PH.secQueAns();
 		MCII.validateQuantity_PCRAIssuance();
 	}
+	
+	 // Hold 2nd Step
+//	@Test(priority=52,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+//	public void Verification_of_update_issuance_records_after_offset_issuance_is_proposed() throws Exception {
+//		//testCaseId ="39957"
+//		MCII = new Registry_Module3_MCII(driver);
+//		PH= new publicHomePage(driver, prop);
+//		PH.selectJurisdiction("California");
+//		PH.loginFunctionality("California", "JurisdictionAdmin");
+//		PH.secQueAns();
+//		MCII.verifyIssuanceRecord_OffsetIssuanceProposal();
+//	}
+	
+	@Test(priority=53,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Issued_Allowances_on_the_Issuance_Account_page_for_Approved_Allowances_Issuance() throws Exception {
+		//testCaseId ="39944"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.verifyAccountBalance_IssuanceAccount_ApprovalAllowanceIssuance();
+	}
+	
+	@Test(priority=54,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_details_of_the_proposed_Allowance_Issuance_Details_page_for_Jurisdiction_Authority() throws Exception {
+		//testCaseId ="39595"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.verifyProposedAllowanceIssuanceDetailsPage_JAuth();
+	}
+	
+	@Test(priority=55,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Request_Revision_to_the_Allowance_Issuance_by_Jurisdiction_Authority() throws Exception {
+		//testCaseId ="39929"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.verifyRequestRevision_AllowanceIssuance_MyApprovals();
+	}
+	
+	@Test(priority=56,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Request_Revision_to_the_Allowance_Issuance_without_providing_comment() throws Exception {
+		//testCaseId ="39952"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.Navigate_To_IssuanceAccount();
+		MCII.verifyRequestRevision_AllowanceIssuance_withoutProvidingComment();
+	}
+	
+	@Test(priority=57,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Serialized_Block_code_Start_End_when_Jurisdiction_Authority_Requests_Revision_to_the_Allowance_Issuance() throws Exception {
+		//testCaseId ="39931"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.Navigate_To_IssuanceAccount();
+		MCII.verifyStartAndEndSerializedCode_RequestRevisionAllowanceIssuanceRecord();
+	}
+	
+	@Test(priority=58,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Revision_Request_Proposed_Offset_Issuance_by_Jurisdiction_Authority() throws Exception {
+		//testCaseId ="39566"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.Navigate_To_IssuanceAccount();
+		MCII.NavigateToOffsetIssuance();
+		MCII.RequestRevisionOffsetIssuance();
+		MCII.verifyTransferEventHistory_RevisionRequestOffsetIssuanceRecord();
+		MCII.verifyMyApprovals_RequestRevisionOffsetIssuanceRecord();
+	}
+	
+	@Test(priority=59,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Revision_Request_Proposed_Offset_Issuance_without_providing_comment() throws Exception {
+		//testCaseId ="39567"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.Navigate_To_IssuanceAccount();
+		MCII.NavigateToOffsetIssuance();
+		MCII.verifyRequestRevision_OffsetIssuance_withoutProvidingComment();
+	}
+	
+	@Test(priority=60,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Serialized_Block_code_Start_End_will_not_generate_on_Compliance_Instruments_table() throws Exception {
+		//testCaseId ="39568"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.Navigate_To_IssuanceAccount();
+		MCII.NavigateToOffsetIssuance();
+		MCII.verifyStartAndEndSerializedCode_RequestRevisionOffsetIssuanceRecord();
+	}
+	
+	@Test(priority=61,retryAnalyzer = Analyzer.RetryAnalyzer.class)
+	public void Verification_of_Serialized_Block_code_Start_End_on_Compliance_Instruments_table_for_Approved_Allowance_Issuance() throws Exception {
+		//testCaseId ="39943"
+		MCII = new Registry_Module3_MCII(driver);
+		PH= new publicHomePage(driver, prop);
+		PH.selectJurisdiction("California");
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		PH.secQueAns();
+		MCII.verifyStartAndEndSerializedCode_ApprovedAllowanceIssuanceRecord();
+	}
+	
 }

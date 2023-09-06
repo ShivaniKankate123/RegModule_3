@@ -54,11 +54,13 @@ public class Registry_Module3_MCII {
 	FileInputStream fis;
 	Actions actions;
 	String ReserveBudget;
+	String AccountBalance;
+	String AvailableAccountBalance;
+	String QuantityIssued;
 
+	
 	@FindBy(xpath = "//a[text()='HOME']")
 	WebElement HomeMenu;
-
-
 	// Common
 	@FindBy(xpath = "//button[text()='Welcome,']")
 	WebElement WelcomeButton;
@@ -156,8 +158,14 @@ public class Registry_Module3_MCII {
 	List<WebElement> TableColumns;
 	@FindBy(xpath = "//h2[text()='Transfers']")
 	WebElement TransferGridTitle;
+	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body2 css-j4m1we'])[4]")
+	WebElement AccountBalancevalue;
+	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body2 css-j4m1we'])[5]")
+	WebElement AvailableAccountBalancevalue;
+	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body2 css-j4m1we'])[1]")
+	WebElement IssuanceAccountNumber;
 	
-
+	
 	// Offset Issunace Account Page
 	@FindBy(xpath = "//h1[text()='Offset Issuance']")
 	WebElement OffsetIssuancePageTitle;
@@ -380,6 +388,8 @@ public class Registry_Module3_MCII {
 	WebElement TransferId;
 	@FindBy(xpath = "(//div[@class='MuiBox-root css-0'])[4]")
 	WebElement TransferStatus;
+	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body2 css-j4m1we'])[3]")
+	WebElement TransferStatusValue;
 	@FindBy(xpath = "(//div[@class='MuiDataGrid-cellContent'])[16]")
 	WebElement StartValueComplianceTable;
 	@FindBy(xpath = "(//div[@class='MuiDataGrid-cellContent'])[17]")
@@ -390,6 +400,19 @@ public class Registry_Module3_MCII {
 	List<WebElement> ColumnLabel;
 	@FindBy(xpath = "//div[text()='Action By']")
 	WebElement ActionByColumnLable;
+	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body2 css-j4m1we'])[4]")
+	WebElement QuantityProposedValue;
+	@FindBy(xpath = "(//p[@class='MuiTypography-root MuiTypography-body2 css-j4m1we'])[2]")
+	WebElement TransferTypeValue;
+	@FindBy(xpath = "//div[@data-field='transferringAccount']")
+	List<WebElement> TransferringAccColumn;
+	@FindBy(xpath = "(//div[@data-field='receivingAccount'])[2]")
+	WebElement ReceivingAccLegNameVal;
+	@FindBy(xpath = "(//div[@data-field='receivingAccount'])[4]")
+	WebElement ReceivingAccNoVal;
+	@FindBy(xpath = "(//div[@data-field='offsetType'])[2]")
+	WebElement OffsetTypeValComplTable;
+	
 	
 	// Authority Home Page
 	@FindBy(xpath = "//a[text()='My Approvals']")
@@ -540,31 +563,12 @@ public class Registry_Module3_MCII {
 		String Title = IssuanceAccountPageTitle.getText();
 		Assert.assertEquals(Title, "Issuance Account");
 		ObjectRepo.test.log(Status.PASS, "JA navigated to Issuance Account page");
-		
-		
-//		try {
-//			JurisdictionAccountsGrid.click();
-//		}
-//		catch(Exception ex) {
-//			JurisdictionAccountsGrid.click();
-//		}
-//		try {
-//			new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(IssuanceAccounts));
-//			IssuanceAccounts.click();
-//		} catch (InterruptedException e) {
-//			new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(IssuanceAccounts));
-//			IssuanceAccounts.click();
-//		}
-//		try {
-//			new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(IssuanceAccountPageTitle));
-//			String Title = IssuanceAccountPageTitle.getText();
-//			Assert.assertEquals(Title, "Issuance Account");
-//		} catch (Exception e) {
-//			driver.navigate().refresh();
-//			String Title = IssuanceAccountPageTitle.getText();
-//			Assert.assertEquals(Title, "Issuance Account");
-//		}
-//		ObjectRepo.test.log(Status.PASS, "JA navigated to Issuance Account page");
+	}
+	
+	public void fetchAccountBalance_issuanceAccount() throws Exception {
+		Thread.sleep(5000);
+		AccountBalance = AccountBalancevalue.getText();
+		AvailableAccountBalance = AvailableAccountBalancevalue.getText();
 	}
 
 	public void verify_UI_IssuanceRecordPage() {
@@ -750,8 +754,10 @@ public class Registry_Module3_MCII {
 			WelcomeButton.click();
 		} catch (Exception e) {
 			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(WelcomeButton));
-			WelcomeButton.click();
+			actions = new Actions(driver);
+			actions.moveToElement(WelcomeButton).click().build().perform();
 		}
+		Thread.sleep(3000);
 		Logout.click();
 	}
 
@@ -946,7 +952,7 @@ public class Registry_Module3_MCII {
 			new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(VintageYearDropdown));
 			CM.click2(VintageYearDropdown, "javascriptClick", "VintageYearDropdown");
 		}
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		VintageYearDropdown.sendKeys(Keys.ARROW_DOWN);
 		VintageYearDropdown.sendKeys(Keys.ENTER);
 		String SelectedYear = VintageYearDropdown.getAttribute("value");
@@ -1044,7 +1050,14 @@ public class Registry_Module3_MCII {
 		String SuccessMessageValue = SuccessMessage.getText();
 		Assert.assertEquals(SuccessMessageValue, "The issuance has been successfully prepared and is awaiting review.");
 		ObjectRepo.test.log(Status.PASS, "Offset Issuance is proposed successfully ");
-		SuccessMsgCancel.click();
+		try {
+			SuccessMsgCancel.click();
+		} catch (Exception e) {
+			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(SuccessMsgCancel));
+			actions = new Actions(driver);
+			actions.moveToElement(SuccessMsgCancel).click().build().perform();
+//			SuccessMsgCancel.click();
+		}
 		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(CreatedTransferId));
 		offsetTransferId = CreatedTransferId.getText();
 //		System.out.println(offsetTransferId);
@@ -1950,26 +1963,32 @@ public class Registry_Module3_MCII {
 		ObjectRepo.test.log(Status.PASS, "Denied Offset Issunace record removed from My Approvals");
 	}
 	
-	public void verifyDeny_OffsetIssuance_withoutProvidingComment() throws Exception {
+	public void verifyRequestRevision_OffsetIssuance_withoutProvidingComment() throws Exception {
 		navigateOffsetIssuanceDetailPage_Auth();
 		Thread.sleep(4000);
 		js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,450)", "");
 		Thread.sleep(3000);
 		try {
-			DenyBtn.click();
+			RequestRevisionsBtn.click();
 		} catch (Exception ex) {
-			CM.click2(DenyBtn, "moveToElementClick", "DenyBtn");
+			CM.click2(RequestRevisionsBtn, "moveToElementClick", "RequestRevisionsBtn");
 		}
 		Thread.sleep(3000);
-		Assert.assertEquals(DenyBtn.isSelected(), true);
-		ObjectRepo.test.log(Status.PASS, " The 'Deny' radio button is displayed as selected");
+		Assert.assertEquals(RequestRevisionsBtn.isSelected(), true);
 		Assert.assertEquals(CommentLabel.getText().contains("*"), true);
-		ObjectRepo.test.log(Status.PASS, "Asterisk mark is displayed on Comment text");
-		CommentText.click();
+		ObjectRepo.test.log(Status.PASS, "Step 1.1 : 'Request Revisions' radio button is displayed as selected & asterisk mark(*) is displayed for Comments text");
+		try {
+			CommentText.click();
+		} catch (Exception e) {
+			actions = new Actions(driver);
+			actions.moveToElement(CommentText).click().build().perform();
+		}
 		CommentText.sendKeys(Keys.TAB);
-		Assert.assertEquals(CommentError.getText(), "Comment is required for denying the issuance record.");
-		ObjectRepo.test.log(Status.PASS, "Error message is displayed for empty comment field");
+		Assert.assertEquals(SubmitBtn.isEnabled(), false);
+		ObjectRepo.test.log(Status.PASS, "Step 1.2 : Submit button is disabled");
+		Assert.assertEquals(CommentError.getText(), "Comment is required for requesting revisions to the issuance record.");
+		ObjectRepo.test.log(Status.PASS, "Step 2 : 'Comment is required for requesting revisions to the issuance record' error message is displayed.");
 	}
 	
 	public void verifyStartAndEndSerializedCode_DenyOffsetIssuanceRecord() throws Exception {
@@ -2026,6 +2045,39 @@ public class Registry_Module3_MCII {
 		Assert.assertEquals(transferStatus.contains("Revisions Requested"), true);
 		ObjectRepo.test.log(Status.PASS, "Transfer Status updated to 'Revisions Requested' ");
 	}
+	
+	public void verifyStartAndEndSerializedCode_RequestRevisionOffsetIssuanceRecord() throws Exception {
+		RequestRevisionOffsetIssuance();
+		Thread.sleep(4000);
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		Assert.assertEquals(StartValueComplianceTable.getText().contains("0"), true);
+		Assert.assertEquals(EndValueComplianceTable.getText().contains("0"), true);
+		Assert.assertEquals(QuantityValueComplianceTable.getText().contains("0"), true);
+		ObjectRepo.test.log(Status.PASS, "Step 1.1 : Serialized Block code Start & End is not generated when the offset issuance is revision requested.");
+		ObjectRepo.test.log(Status.PASS, "Step 1.2 : Value '0' is displayed for the Start, End and Quantity.");
+	}
+	public void verifyDeny_OffsetIssuance_withoutProvidingComment() throws Exception {
+		navigateOffsetIssuanceDetailPage_Auth();
+		Thread.sleep(4000);
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		Thread.sleep(3000);
+		try {
+			DenyBtn.click();
+		} catch (Exception ex) {
+			CM.click2(DenyBtn, "moveToElementClick", "DenyBtn");
+		}
+		Thread.sleep(3000);
+		Assert.assertEquals(DenyBtn.isSelected(), true);
+		ObjectRepo.test.log(Status.PASS, " The 'Deny' radio button is displayed as selected");
+		Assert.assertEquals(CommentLabel.getText().contains("*"), true);
+		ObjectRepo.test.log(Status.PASS, "Asterisk mark is displayed on Comment text");
+		CommentText.click();
+		CommentText.sendKeys(Keys.TAB);
+		Assert.assertEquals(CommentError.getText(), "Comment is required for denying the issuance record.");
+		ObjectRepo.test.log(Status.PASS, "Error message is displayed for empty comment field");
+	}
 
 	public void verifyTransferEventHistory_RevisionRequestOffsetIssuanceRecord() {
 		js = (JavascriptExecutor) driver;
@@ -2036,6 +2088,17 @@ public class Registry_Module3_MCII {
 		Assert.assertEquals(DenyRecord, "Revisions Requested");
 		ObjectRepo.test.log(Status.PASS,
 				"Revisions Requested record is added to the Transfer Event History table with a comment.");
+	}
+	
+	public void verifyMyApprovals_RequestRevisionOffsetIssuanceRecord() throws Exception {
+		navigateBackToHomePage();
+		navigateToMyApprovals_JAuth();
+		System.out.println(offsetTransferId);
+		Search.sendKeys(offsetTransferId);
+		Thread.sleep(3000);
+		String rows = TotalRows.getText();
+		Assert.assertEquals(rows.contains("0"), true);
+		ObjectRepo.test.log(Status.PASS, "Step 3 : Revision Requested offset Issuance Record is removed from the 'My Approvals' table");
 	}
 
 	public void verifyStatus_IssuanceRecord_RevisionRequestOffset() throws Exception {
@@ -2084,6 +2147,37 @@ public class Registry_Module3_MCII {
 		ObjectRepo.test.log(Status.PASS,
 				"Jurisdiction Authority navigates to My Approvals page on clicking of Continue button of warning pop-up");
 	}
+	
+//	public void verifyIssuanceRecord_OffsetIssuanceProposal() {
+//		Navigate_To_IssuanceAccount();
+//		NavigateToOffsetIssuance();
+//		ProposeOffsetIssuance_UniqueProjectId();
+//		navigateToIssuanceRecordsPage_MegaMenu();
+//		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(Search));
+//		Search.sendKeys(offsetTransferId);
+//		Thread.sleep(3000);
+//		Assert.assertEquals(TransferIdColumn.getText(), offsetTransferId);
+//		ObjectRepo.test.log(Status.PASS, "Step 1 : The proposed Offset Issuance Record With the Transfer ID is displayed in the Issuance Records table.");
+//		TransferIdColumn.click();
+//		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(OffsetIssuanceDetailsAuthPageTitle));
+//		Assert.assertEquals(OffsetIssuanceDetailsAuthPageTitle.isDisplayed(), true);
+//		ObjectRepo.test.log(Status.PASS, "Step 2 : Allowance Issuance Details Page is displayed with all the details of the Proposed Allowance Issuance.");
+//		verifyComplianceInstrumentTable_AllowanceIssuanceDetail();
+//		js = (JavascriptExecutor) driver;
+//		js.executeScript("window.scrollBy(0,450)", "");
+//		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(StartValueComplianceTable));
+//		System.out.println(StartValueComplianceTable.getText());
+//		Assert.assertEquals(EndValueComplianceTable.isDisplayed(), true);
+//		Assert.assertEquals(EndValueComplianceTable.getText().equals("0"), true);
+//		Assert.assertEquals(StartValueComplianceTable.getText().contains("0"), true);
+//		Assert.assertEquals(QuantityValueComplianceTable.getText().contains("0"), true);
+//		ObjectRepo.test.log(Status.PASS, "Step 3.1 : Compliance Instruments’ card is displayed with all the fields");
+//		ObjectRepo.test.log(Status.PASS, "Step 3.2 : Compliance Instruments table have a record for the proposed Offset Issuance Transfer ID and the Start, End, and Quantity is '0'.");
+//		verifyTransferEventHistoryTable_AllowanceIssuanceDetail();
+//		ObjectRepo.test.log(Status.PASS, "Step 4.1 : ‘Transfer Event History’ card is displayed with all fields");
+//		verifyTransferEventHistory_ProposeAllowanceIssuanceRecord();
+//		ObjectRepo.test.log(Status.PASS, "Step 4.2 : In the transfer Event History Table there is one record of proposed Allowance Issuance.");
+//	}
 
 
 	// Allowance Issuance
@@ -2287,8 +2381,8 @@ public class Registry_Module3_MCII {
 		String SubTypeval = SubTypeDropdown.getAttribute("value");
 		ObjectRepo.test.log(Status.PASS, "Sub Type value selected is: " + SubTypeval);
 		quantity.sendKeys("100");
-		String QuantityVal = quantity.getAttribute("value");
-		ObjectRepo.test.log(Status.PASS, "Quantity value entered is: " + QuantityVal);
+		QuantityIssued = quantity.getAttribute("value");
+		ObjectRepo.test.log(Status.PASS, "Proposed Quantity is: " + QuantityIssued);
 		Assert.assertEquals(SubmitButton.isEnabled(), true);
 		ObjectRepo.test.log(Status.PASS, "Submit button is enabled");
 		try {
@@ -2320,10 +2414,10 @@ public class Registry_Module3_MCII {
 		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(AllowanceIssuanceDetailsPageTitle));
 		String PageTitle = AllowanceIssuanceDetailsPageTitle.getText();
 		Assert.assertEquals(PageTitle, "Allowance Issuance Details");
-		ObjectRepo.test.log(Status.PASS, "Allowance Issuance proposed Successfully ");
+		Thread.sleep(8000);
 		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(TransferId));
 		allowancetransferId = TransferId.getText();
-		System.out.println(allowancetransferId);
+//		System.out.println(allowancetransferId);
 		ObjectRepo.test.log(Status.PASS, "Created Transfer Id for Allowance Issuance is: " + allowancetransferId);
 		
 	}
@@ -2487,7 +2581,7 @@ public class Registry_Module3_MCII {
 		try {
 			CancelButton.click();
 		} catch (Exception ex) {
-			CM.click2(CancelButton, "moveToElementClick", "CancelButton");
+			CM.click2(CancelButton, "javascriptClick", "CancelButton");
 		}
 		Thread.sleep(3000);
 		Assert.assertEquals(WrngCancelBtn.isEnabled() && WrngCntinueBtn.isEnabled(), true);
@@ -2514,6 +2608,7 @@ public class Registry_Module3_MCII {
 	}
 
 	public void verifyCancelBtnAllowanceIssuance_JAdmin() throws Exception {
+		CM = new CommonMethods(driver);
 		Navigate_To_IssuanceAccount();
 		navigateToAllowanceIssuancePage();
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
@@ -2523,7 +2618,7 @@ public class Registry_Module3_MCII {
 			CancelButton.click();
 		} catch (Exception e) {
 			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(CancelButton));
-			CancelButton.click();
+			CM.click2(CancelButton, "javascriptClick", "CancelButton");
 		}
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		Assert.assertEquals(WrngCancelBtn.isEnabled() && WrngCntinueBtn.isEnabled(), true);
@@ -2787,7 +2882,11 @@ public class Registry_Module3_MCII {
 		PH = new publicHomePage(driver, prop);
 		Thread.sleep(3000);
 		PH.loginFunctionality("California", "Authority");
-		PH.secQueAns();
+		try {
+			PH.secQueAns();
+		} catch (Exception e) {
+			System.out.println("");
+		}
 		navigateToMyApprovals_JAuth();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		Search.sendKeys(allowancetransferId);
@@ -2809,7 +2908,7 @@ public class Registry_Module3_MCII {
 			CM.click2(ApproveRadioBtn, "javascriptClick", "ApproveRadioBtn");
 		}
 		Assert.assertEquals(SubmitBtn.isEnabled(), true);
-		ObjectRepo.test.log(Status.PASS, "Submit button is enebled post clicking on Approve Rario button");
+		ObjectRepo.test.log(Status.PASS, "Submit button is enabled post clicking on Approve Radio button");
 		try {
 			SubmitBtn.click();
 		} catch (Exception ex) {
@@ -3024,6 +3123,21 @@ public class Registry_Module3_MCII {
 		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(AllowanceIssuanceDetailsPageTitle));
 		Assert.assertEquals(AllowanceIssuanceDetailsPageTitle.getText(), "Allowance Issuance Details");
 		ObjectRepo.test.log(Status.PASS, "User is navigated to 'Allowance Issuance details' page.");
+	}
+	
+	public void verifyStartAndEndSerializedCode_RequestRevisionAllowanceIssuanceRecord() throws Exception {
+		verifyRequestRevisionFunctionality_AllowanceIssuance();
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(StartValueComplianceTable));
+		System.out.println(StartValueComplianceTable.getText());
+		Assert.assertEquals(EndValueComplianceTable.isDisplayed(), true);
+		Assert.assertEquals(EndValueComplianceTable.getText().equals("0"), true);
+		Assert.assertEquals(StartValueComplianceTable.getText().contains("0"), true);
+		Assert.assertEquals(QuantityValueComplianceTable.getText().contains("0"), true);
+		ObjectRepo.test.log(Status.PASS, "Step 1.1 : Serialized Block code Start & End is not generated when the Allowance Issuance is revision requested.");
+		ObjectRepo.test.log(Status.PASS, "Step 1.2 : Value '0' is displayed for the Start, End and Quantity.");
 	}
 	
 	public void verifyTransferStatus_RequestRevisionAllowanceIssuanceRecord() {
@@ -3346,5 +3460,137 @@ public class Registry_Module3_MCII {
 		Assert.assertEquals(Msg, "The issuance has been successfully prepared and is awaiting review.");
 		ObjectRepo.test.log(Status.PASS, "Allowance Issunace proposed Successfully ");
 		ObjectRepo.test.log(Status.PASS, "Step 3 : Error message is not displayed and valid Quantity is accepted.");
+	}
+	
+	public void verifyAccountBalance_IssuanceAccount_ApprovalAllowanceIssuance() throws Exception {
+		Navigate_To_IssuanceAccount();
+		fetchAccountBalance_issuanceAccount();
+		ObjectRepo.test.log(Status.PASS, "Account Balance of Issuance Account before proposing Allowance Issuance is : "+AccountBalance);
+		ObjectRepo.test.log(Status.PASS, "Available Account Balance of Issuance Account before proposing Allowance Issuance is : "+AvailableAccountBalance);
+		String PreviousAccountBalance = AccountBalance;
+		String modifiedNum = PreviousAccountBalance.replace(",", "");
+		int PreAccBal = Integer.parseInt(modifiedNum);
+		System.out.println("Previous Account Balance: "+PreviousAccountBalance);
+		verifyApproveAllowanceFunctionality_JAuth();
+		navigateBackToHomePage();
+		Navigate_To_IssuanceAccount();
+		fetchAccountBalance_issuanceAccount();
+		ObjectRepo.test.log(Status.PASS, "Account Balance of Issuance Account after approving Allowance Issuance is : "+AccountBalance);
+		ObjectRepo.test.log(Status.PASS, "Available Account Balance of Issuance Account after approving Allowance Issuance is : "+AvailableAccountBalance);
+		int quantity = Integer.parseInt(QuantityIssued);
+		int ExpUpdatedAccBal = PreAccBal + quantity;
+		System.out.println("Expected Updated Account Balance: "+ExpUpdatedAccBal);
+		String updatedAccountBal = AccountBalance.replace(",", "");
+		int ActUpdatedAccBal = Integer.parseInt(updatedAccountBal);
+		System.out.println("Actual Updated Account Balance: "+ActUpdatedAccBal);
+		System.out.println("Updated Account Balance : "+updatedAccountBal);
+		Assert.assertEquals(ActUpdatedAccBal, ExpUpdatedAccBal);
+		ObjectRepo.test.log(Status.PASS, "Step 1 : Account Balance and the Available Account Balance in the Issuance Account is updated with an addition of approved allowances in the Quantity.");
+	}
+	
+	public void verifyProposedAllowanceIssuanceDetailsPage_JAuth() throws Exception {
+		Navigate_To_IssuanceAccount();
+		String IssuanceAccNo = IssuanceAccountNumber.getText();
+		navigateToAllowanceIssuanceDetails();
+		Thread.sleep(7000);
+		Assert.assertEquals(TransferId.getText(), allowancetransferId);
+		Assert.assertEquals(TransferTypeValue.getText(), "Allowance Issuance");
+		Assert.assertEquals(TransferStatusValue.getText(),"Proposed");
+		Assert.assertEquals(QuantityProposedValue.getText(), QuantityIssued);
+		ObjectRepo.test.log(Status.PASS, "Step 1.1 : The issuance details are populated on the page.");
+		for(int i=1;i<TransferringAccColumn.size();i++) {
+			Assert.assertEquals(TransferringAccColumn.get(i).getText(), "");
+		}
+		ObjectRepo.test.log(Status.PASS, "Step 1.2 : Transferring account is blank.");
+		Assert.assertEquals(ReceivingAccLegNameVal.getText(), "California");
+		Assert.assertEquals(ReceivingAccNoVal.getText(), IssuanceAccNo);
+		ObjectRepo.test.log(Status.PASS, "Step 1.3 : Jurisdiction account details is displayed in the receiving account column.");
+		Thread.sleep(4000);
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		Assert.assertEquals(StartValueComplianceTable.getText().contains("0"), true);
+		Assert.assertEquals(EndValueComplianceTable.getText().contains("0"), true);
+		Assert.assertEquals(QuantityValueComplianceTable.getText().contains("0"), true);
+		Assert.assertEquals(OffsetTypeValComplTable.getText(), "");
+		ObjectRepo.test.log(Status.PASS, "Step 1.4 : In the Compliance Instruments table, offset type is blank and quantity, start and end is displayed as '0'.");
+	}
+	
+	public void verifyRequestRevision_AllowanceIssuance_MyApprovals() throws Exception {
+		Navigate_To_IssuanceAccount();
+		verifyRequestRevisionFunctionality_AllowanceIssuance();
+		navigateBackToHomePage();
+		navigateToMyApprovals_JAuth();
+		Search.sendKeys(allowancetransferId);
+		Thread.sleep(5000);
+		String rows = TotalRows.getText();
+		Assert.assertEquals(rows.contains("0"), true);
+		ObjectRepo.test.log(Status.PASS, "Step 3 : Revision Requested Allowance Issuance Record is removed from the 'My Approvals' table.");
+	}
+	
+	public void verifyRequestRevision_AllowanceIssuance_withoutProvidingComment() throws Exception {
+		navigateToAllowanceIssuanceDetails();
+		js = (JavascriptExecutor) driver;
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		js.executeScript("arguments[0].scrollIntoView();", RequestRevisionsBtn);
+		try {
+			RequestRevisionsBtn.click();
+		} catch (Exception ex) {
+			CM.click2(RequestRevisionsBtn, "javascriptClick", "RequestRevisionsBtn");
+		}
+		Assert.assertEquals(RequestRevisionsBtn.isSelected(), true);
+		Assert.assertEquals(CommentLabel.getText().contains("*"), true);
+		ObjectRepo.test.log(Status.PASS, "Step 1.1 : 'Request Revisions' radio button is displayed as selected & asterisk mark(*) is displayed for Comments field.");
+		Assert.assertEquals(SubmitlBtn_OffsetIssuance.isEnabled(), false);
+		ObjectRepo.test.log(Status.PASS, "Step 1.2 : Submit button is disabled");
+		try {
+			CommentText.click();
+		} catch (Exception e) {
+			new WebDriverWait(driver, 40).until(ExpectedConditions.elementToBeClickable(CommentText));
+			CommentText.click();
+		}
+		CommentText.sendKeys(Keys.TAB);
+		Assert.assertEquals(CommentError.getText(), "Comment is required for requesting revisions to the issuance record.");
+		ObjectRepo.test.log(Status.PASS, "Step 2 : 'Comment is required for requesting revisions to the issuance record' error message is displayed.");
+	}
+	
+	public void verifyStartAndEndSerializedCode_ApprovedAllowanceIssuanceRecord() throws Exception {
+		Navigate_To_IssuanceAccount();
+		verifyApproveAllowanceFunctionality_JAuth();
+		Thread.sleep(4000);
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		String StartValue = StartValueComplianceTable.getText();
+		String EndValue = EndValueComplianceTable.getText();
+		ObjectRepo.test.log(Status.PASS, "Start Code value of last block is : "+StartValue);
+		ObjectRepo.test.log(Status.PASS, "End Code value of last block is : "+EndValue);
+		Thread.sleep(3000);
+		LogoutFunctionality();
+		Thread.sleep(3000);
+		PH= new publicHomePage(driver, prop);
+		PH.loginFunctionality("California", "JurisdictionAdmin");
+		try {
+			PH.secQueAns();
+		} catch (Exception e) {
+			System.out.println("Security question is not displayed");
+		}
+		Navigate_To_IssuanceAccount();
+		verifyApproveAllowanceFunctionality_JAuth();
+		Thread.sleep(4000);
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,450)", "");
+		String ActStartValue2 = StartValueComplianceTable.getText();
+		String ActEndValue2 = EndValueComplianceTable.getText();
+		int Quantity = Integer.parseInt(QuantityIssued);
+		int start = Integer.parseInt(EndValue);
+		int expstart = start+1;
+		//int end = Integer.parseInt(StartValue);
+		int expend = expstart+Quantity-1;
+		String ExpStart=String.valueOf(expstart);
+		String ExpEnd=String.valueOf(expend);
+		Assert.assertEquals(ActStartValue2, ExpStart);
+		Assert.assertEquals(ActEndValue2, ExpEnd);
+		ObjectRepo.test.log(Status.PASS, "Step 1.1 : Values of Serialized Block code Start & End is populated for the approved Allowance Issuance.");
+		ObjectRepo.test.log(Status.PASS, "Step 1.2 : Start code value is 'End+1' of the last block created : "+ActStartValue2);
+		ObjectRepo.test.log(Status.PASS, "Step 1.3 : End code value is Start code + (Quantity -1) : "+ActEndValue2);
 	}
 }

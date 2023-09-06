@@ -7,9 +7,9 @@
         <methods>
           <include name="setup"/>
           <include name="sentReportToTheMail"/>
-          <include name="Validation_of_Quantity_against_Reserve_Budget_for_Price_Containment_Reserve_Allowance_Issuance"/>
           <include name="closeBrowser"/>
           <include name="addResultToTestrail"/>
+          <include name="Verification_of_Serialized_Block_code_Start_End_on_Compliance_Instruments_table_for_Approved_Allowance_Issuance"/>
           <include name="start"/>
         </methods>
       </class> <!-- Tests.Registry_Module3_MCII_Test -->
